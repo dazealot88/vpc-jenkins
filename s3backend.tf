@@ -2,10 +2,10 @@
 # Configuring the Remote Backend With S3
 terraform {
   backend "s3" {
-    bucket         = "demo-terraform.tfstate"
+    bucket         = "moks-tfstate"
     key            = "key/terraform.tfstate"
     region         = "us-west-1"
-    #dynamodb_table = "state_lock"
+    dynamodb_table = "state-lock"
     encrypt        = true
 
   }
@@ -21,7 +21,7 @@ terraform {
 
 # Enabling Versioning 
 resource "aws_s3_bucket_versioning" "versioning-state" {
-  bucket = "demo-terraform.tfstate"
+  bucket = "moks-tfstate"
   versioning_configuration {
     status = "Enabled"
   }
@@ -29,7 +29,7 @@ resource "aws_s3_bucket_versioning" "versioning-state" {
 
 # Configuring the Encryption
 resource "aws_s3_bucket_server_side_encryption_configuration" "new" {
-  bucket = "demo-terraform.tfstate"
+  bucket = "moks-tfstate"
 
   rule {
     apply_server_side_encryption_by_default {
