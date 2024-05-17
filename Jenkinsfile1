@@ -15,7 +15,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout from the source code repository
-                git branch: 'main', url: 'https://github.com/dazealot88/vpc-codes.git'
+                git branch: 'main', url: 'https://github.com/dazealot88/vpc-jenkins.git'
             }
         }
 
