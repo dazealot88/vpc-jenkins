@@ -1,4 +1,4 @@
-
+/*
 # Configuring the Remote Backend With S3
 terraform {
   backend "s3" {
@@ -37,7 +37,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "new" {
     }
   }
 }
-
+*/
 
 
 /*AES256 (Advanced Encryption Standard 256-bit) is a symmetric encryption algorithm widely used for securing data. 
