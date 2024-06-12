@@ -16,6 +16,24 @@ ingress {
   protocol    = "tcp"       # SSH protocol is TCP
   cidr_blocks = ["0.0.0.0/0"] # Allow SSH from anywhere
 }
+ingress {
+  from_port   = 8080
+  to_port     = 8080
+  protocol    = "tcp"       # Jenkins Port
+  cidr_blocks = ["0.0.0.0/0"] # Allow SSH from anywhere
+}
+ingress {
+  from_port   = 9000
+  to_port     = 9000
+  protocol    = "tcp"       # SonarQube Port
+  cidr_blocks = ["0.0.0.0/0"] # Allow SSH from anywhere
+}
+ingress {
+  from_port   = 8081 
+  to_port     = 8081
+  protocol    = "tcp"       # Nexus Port
+  cidr_blocks = ["0.0.0.0/0"] # Allow SSH from anywhere
+}
 
 
 # Egress rules (outgoing traffic)
