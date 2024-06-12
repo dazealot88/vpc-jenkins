@@ -22,7 +22,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
-                sh 'terraform init -reconfigure'
+                sh 'terraform init'
             }
         }
         stage('Terraform Plan') {
@@ -37,10 +37,10 @@ pipeline {
                 sh 'terraform apply -auto-approve'
             }
         }
-        stage('Sleep 5mins') {
+        stage('Sleep 10mins') {
             steps {
-                // Pause the pipeline for 120 seconds
-                sleep time: 5, unit: 'MINUTES'
+                // Pause the pipeline for 10 minutes
+                sleep time: 10, unit: 'MINUTES'
             }
         }
         stage('Terraform Destroy') {
