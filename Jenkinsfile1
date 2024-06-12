@@ -1,6 +1,7 @@
 pipeline {
-    agent any
-
+    agent {
+        label 'Agent1'
+}
     stages {
         stage('Checkout') {
             steps {
@@ -21,7 +22,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
-                sh 'terraform init'
+                sh 'terraform init -reconfigure'
             }
         }
         stage('Terraform Plan') {
