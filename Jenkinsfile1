@@ -37,10 +37,10 @@ pipeline {
                 sh 'terraform apply -auto-approve'
             }
         }
-        stage('Sleep 10mins') {
+        stage('Sleep 5mins') {
             steps {
                 // Pause the pipeline for 10 minutes
-                sleep time: 10, unit: 'MINUTES'
+                sleep time: 5, unit: 'MINUTES'
             }
         }
         stage('Terraform Destroy') {
