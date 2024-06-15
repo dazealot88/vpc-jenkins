@@ -1,4 +1,4 @@
-/*
+
 # Creating EC2 instance in private subnet
 
 resource "aws_instance" "private-server" {
@@ -12,4 +12,4 @@ resource "aws_instance" "private-server" {
       Name ="private-server"
     }
 }
-*/
+
