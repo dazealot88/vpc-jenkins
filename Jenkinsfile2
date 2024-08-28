@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the code from the Git repository
+                git branch: 'main', url: 'https://github.com/dazealot88/vpc-jenkins.git'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                // Run SonarQube analysis
+                withSonarQubeEnv('jenkins-sonar') {
+                    sh './mvnw clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                }
+            }
+        }
+        stage('Terraform Init') {
+            steps {
+                // Initialize Terraform
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                // Generate and show Terraform execution plan
+                sh 'terraform plan'
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                // Apply the Terraform plan to create/update infrastructure
+                sh 'terraform apply -auto-approve'
+            }
+        }
+        stage('Sleep 5mins') {
+            steps {
+                // Pause the pipeline for 5 minutes
+                sleep time: 5, unit: 'MINUTES'
+            }
+        }
+        stage('Terraform Destroy') {
+            steps {
+                // Destroy the Terraform-managed infrastructure
+                sh 'terraform destroy -auto-approve'
+            }
+        }
+    }
+
+    post {
+        always {
+            // Actions to perform after the pipeline run, e.g., cleanup or notifications
+            echo 'Pipeline run complete.'
+        }
+        failure {
+            // Actions to perform if the pipeline fails, e.g., notifications
+            echo 'Pipeline failed!'
+        }
+    }
+}
